@@ -21,6 +21,11 @@ public enum DistanceUnit {
         }
 
         @Override
+        public double toInches(double m) {
+            return m*CI;
+        }
+
+        @Override
         public double toMeters(double m) {
             return m;
         }
@@ -42,6 +47,11 @@ public enum DistanceUnit {
         }
 
         @Override
+        public double toInches(double f) {
+            return CI/CF;
+        }
+
+        @Override
         public double toMeters(double ft) {
             return ft/CF;
         }
@@ -49,6 +59,37 @@ public enum DistanceUnit {
         @Override
         public double toMiles(double feet) {
             return feet/(CF*CKM*CM);
+        }
+
+        @Override
+        public double convert(DistanceUnit distanceUnit, double distance_value) {
+            return distanceUnit.toFeet(distance_value);
+        }
+    }, INCHES("inches") {
+        @Override
+        public double toKm(double inches) {
+
+            return (inches/(CI*CKM));
+        }
+
+        @Override
+        public double toFeet(double inches) {
+            return (inches*(CI/CF));
+        }
+
+        @Override
+        public double toInches(double inches) {
+            return inches;
+        }
+
+        @Override
+        public double toMeters(double inches) {
+            return inches/CI;
+        }
+
+        @Override
+        public double toMiles(double inches) {
+            return inches/(CF*CKM*CM);
         }
 
         @Override
@@ -64,6 +105,11 @@ public enum DistanceUnit {
         @Override
         public double toFeet(double km) {
             return km*CKM*CF;
+        }
+
+        @Override
+        public double toInches(double km) {
+            return km*CKM*CI;
         }
 
         @Override
@@ -92,6 +138,11 @@ public enum DistanceUnit {
         }
 
         @Override
+        public double toInches(double miles) {
+            return miles*CKM*CM*CI;
+        }
+
+        @Override
         public double toMeters(double miles) {
             return miles*CM*1000;
         }
@@ -112,8 +163,10 @@ public enum DistanceUnit {
     public final double CF = 3.2808399;
     public final double CKM = 1000;
     public final double CM = 1.609344;
+    public final double CI = 39.3701;
 
     public abstract double toFeet(double m);
+    public abstract double toInches(double m);
 
     public abstract double toMeters(double distance_value);
 
